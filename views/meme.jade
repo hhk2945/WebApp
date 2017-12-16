@@ -1,0 +1,26 @@
+extends layout
+
+block meta_head
+    meta(property="og:title" content="짤방 by "+meme.user.username)
+    meta(property="og:url" content=url_base+'/memes/'+meme.id)
+    meta(property="og:image" content=url_base+meme.attachment.filepath)
+    meta(property="og:description" content=meme.description)
+
+block content
+    script(type='text/javascript' src='/javascripts/copy.js')
+    h1 짤방
+    div.panel.panel-default
+      div.panel-heading
+        img.img-rounded.avatar(src=meme.user.getProfileUrl() style="width: 32px; width: 32px;")
+        span
+          a(href='/user/'+meme.user.username)=' '+meme.user.username
+        @ #{meme.created_at}
+        if session.username == meme.user.username
+          a(href='/memes/'+meme.id+'/delete')
+            label.btn.glyphicon.glyphicon-remove(aria-hidden="true" style="float:right;color:black;width: 32px; width: 32px;")
+          a(href='/memes/' + meme.id + '/edit')
+            label.btn.glyphicon.glyphicon-edit(aria-hidden="true" style="float:right;color:black;width: 32px; width: 32px; ")
+      div.panel-body(id="meme-#{meme.id}")
+        a(href="/memes/#{meme.id}")
+          img(src=meme.attachment.filepath style="min-width: 512px; max-width: 512px;" alt=url_base+'/memes/'+meme.id onclick='copy('+meme.id+')' ondragleave='dragged('+meme.id+')')
+      div.panel-footer= meme.description

@@ -1,0 +1,65 @@
+doctype html
+html
+  head
+    title= title
+    script(src='/javascripts/jquery-3.1.1.min.js')
+    script(src='/javascripts/bootstrap-3.3.7.min.js')
+    link(href='/stylesheets/bootstrap-3.3.7.min.css' rel='stylesheet')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    block meta_head
+  body
+    //- http://bootsnipp.com/snippets/featured/fancy-navbar-login-sign-in-form
+    nav.navbar.navbar-default
+      div.navbar-header
+        a.navbar-brand(href="/") 짤방
+      div.navbar-collapse.collapse
+        ul.nav.navbar-nav
+          li
+            a(href='/trending') Trending
+          li
+            if session.user_id
+              a(href='/memes/new') Upload
+        form.navbar-form.navbar-left(action="/search")
+          div.form-group
+            input.form-control(name="q", placeholder="Search")
+          button.btn.btn-default Submit
+        ul.nav.navbar-nav.navbar-right
+          if session.user_id
+            li.dropdown
+              a.dropdown-toggle(data-toggle="dropdown", href="#") #{session.username}
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href='/user/' + session.username) 내짤방
+                li
+                  a(href="/user/friends") 친구관리
+                li
+                  a(href="/user/profile") 프로필설정
+            li
+              form.navbar-form(action="/user/logout", method="POST")
+                button.btn Logout&nbsp;
+                  span.glyphicon.glyphicon-log-out
+          else
+            li.dropdown
+              a.dropdown-toggle(data-toggle="dropdown", href="#") Login
+                span.caret
+              ul.dropdown-menu#login-dp
+                li
+                  div.row
+                    div.col-md-12
+                      form.form(action="/user/login", method="POST")
+                        div.form-group
+                          label.sr-only(for="username") ID
+                          input.form-control(name="username", placeholder="ID", required)
+                        div.form-group
+                          label.sr-only(for="password") Password
+                          input.form-control(name="password", placeholder="Password", type="password", required)
+                        div.form-group
+                          button.btn.btn-primary.btn-block(type="submit") Login
+                            span.glyphicon.glyphicon-log-in
+                    div.bottom.text-center="New here? "
+                      a(href="/user/signup/") Sign Up
+    if messages.error
+      div.alert.alert-danger= messages.error
+    div.container-fluid
+      block content

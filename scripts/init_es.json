@@ -1,0 +1,23 @@
+{
+  "settings":{
+    "index":{
+      "analysis":{
+        "analyzer":{
+          "korean":{
+            "type":"custom",
+            "tokenizer":"mecab_ko_standard_tokenizer"
+          }
+        }
+      }
+    }
+  },"mappings":{
+    "meme":{
+      "properties":{
+        "description":{
+          "type":"string",
+          "analyzer":"korean"
+        }
+      }
+    }
+  }
+}

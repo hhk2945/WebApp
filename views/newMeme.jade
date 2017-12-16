@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  script(type='text/javascript' src='/javascripts/uploadingFile.js')
+  form(method="post" action="/memes" enctype="multipart/form-data")
+    div.input-group
+      input.form-control(value="이미지 파일 업로드" disabled="disabled")
+      label.input-group-btn
+        span.btn.btn-primary 찾아보기
+          input.uploadImg(type="file" id='attachFile' style="display: none;" name="image" multiple)
+    br
+    div.uploadImgList
+
+    button.btn.btn-primary(name='apply' disabled=true) 제출
+

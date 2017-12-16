@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    img.uploads-display(src=meme.attachment.filepath)
+    form(method="post" action="/memes/"+meme.id+"/edit")
+        input.form-control(name="description" value=meme.description)
+        select(name="privacy_level")
+            option(value="public" selected=meme.privacy_level=="public") 전체공개
+            option(value="friends" selected=meme.privacy_level=="friends") 친구공개
+            option(value="private" selected=meme.privacy_level=="private") 비공개
+        button.btn.btn-primary(name="apply") 수정하기

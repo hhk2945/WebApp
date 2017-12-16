@@ -1,0 +1,41 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+@media(min-width: 768px) {
+  .uploadImgList .upload-display {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 0;
+  }
+}
+
+/* 추가될 이미지를 감싸는 요소 */
+.uploadImgList .upload-thumb-wrap {
+  display: inline-block;
+  width: 400px;
+  padding: 2px;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+/* 추가될 이미지 */
+.uploadImgList .upload-display img {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+#login-dp {
+  min-width: 250px;
+  padding: 14px;
+  overflow: hidden;
+}

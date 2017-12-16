@@ -1,0 +1,11 @@
+.paging
+-var maxpage = Math.ceil(total/limit)
+nav(aria-label="Page navigation")
+    ul.pagination
+        -for(var i = 0; i < maxpage; i++)
+            if(i+1 == page)
+                li.active
+                    span #{i+1}
+            else
+                li
+                    a(href=urlHelper('page', i+1)) #{i+1}

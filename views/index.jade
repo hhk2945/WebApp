@@ -1,0 +1,34 @@
+extends layout
+
+block meta_head
+  meta(property="og:url" content=url_base)
+  meta(property="og:title" content="짤방")
+
+block content
+  script(type='text/javascript' src='/javascripts/copy.js')
+  if user
+    h1
+      img.img-rounded.avatar(src=user.getProfileUrl() style="width: 64px; width: 64px;")
+      span= ' '+user.username
+      small= ' '+user.email
+  else
+    h1 !{title} 짤방
+  ul.list-unstyled
+    each meme in memes
+      li
+        div.panel.panel-default
+          div.panel-heading
+            img.img-rounded.avatar(src=meme.user.getProfileUrl() style="width: 32px; width: 32px;")
+            span
+              a(href='/user/'+meme.user.username)=' '+meme.user.username
+            @ #{meme.created_at}
+            if session.username == meme.user.username
+              a(href='/memes/'+meme.id+'/delete')
+                label.btn.glyphicon.glyphicon-remove(aria-hidden="true" style="float:right;color:black;width: 32px; width: 32px;")
+              a(href='/memes/' + meme.id + '/edit')
+                label.btn.glyphicon.glyphicon-edit(aria-hidden="true" style="float:right;color:black;width: 32px; width: 32px; ")
+          div.panel-body(id="meme-#{meme.id}")
+            a(href="/memes/#{meme.id}")
+              img(src=meme.attachment.filepath style="min-width: 512px; max-width: 512px;" ondragleave='dragged('+meme.id+')')
+          div.panel-footer= meme.description
+  include paging
